@@ -1,0 +1,148 @@
+[gd_scene load_steps=6 format=3 uid="uid://m06jjb55lshi"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_quest_menu.gd" id="1_1fv67"]
+[ext_resource type="Script" path="res://scripts/ui/ui_test_menu.gd" id="1_1gf5h"]
+[ext_resource type="Script" path="res://scripts/ui/ui_quest_selector.gd" id="3_u51lv"]
+[ext_resource type="PackedScene" uid="uid://dcprnc8vucm2n" path="res://scenes/ui/quest_button.tscn" id="4_y0s5l"]
+[ext_resource type="Script" path="res://scripts/ui/ui_quest_viewer.gd" id="5_4ndsx"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1gf5h")
+
+[node name="OpenMenuButton" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Open Quest Menu"
+
+[node name="AddQuestButton" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Add Quest
+"
+
+[node name="ProgressQuestButton" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Progress Quest"
+
+[node name="QuestMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1fv67")
+
+[node name="ColorRect" type="ColorRect" parent="QuestMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[node name="QuestSelect" type="Panel" parent="QuestMenu"]
+custom_minimum_size = Vector2(350, 800)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -400.0
+offset_right = 450.0
+offset_bottom = 400.0
+grow_vertical = 2
+script = ExtResource("3_u51lv")
+
+[node name="ActiveCont" type="VBoxContainer" parent="QuestMenu/QuestSelect"]
+custom_minimum_size = Vector2(300, 800)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -400.0
+offset_right = 150.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestButton" parent="QuestMenu/QuestSelect/ActiveCont" instance=ExtResource("4_y0s5l")]
+layout_mode = 2
+
+[node name="QuestViewer" type="Panel" parent="QuestMenu"]
+custom_minimum_size = Vector2(800, 800)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1105.0
+offset_top = -400.0
+offset_right = -305.0
+offset_bottom = 400.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("5_4ndsx")
+
+[node name="QuestNameLabel" type="RichTextLabel" parent="QuestMenu/QuestViewer"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 21.0
+offset_right = 200.0
+offset_bottom = 71.0
+grow_horizontal = 2
+text = "Quest Name Here"
+
+[node name="QuestDescriptionLabel" type="RichTextLabel" parent="QuestMenu/QuestViewer"]
+custom_minimum_size = Vector2(700, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -350.0
+offset_top = 77.0
+offset_right = 350.0
+offset_bottom = 127.0
+grow_horizontal = 2
+text = "Quest Description belongs here."
+
+[node name="CloseButton" type="Button" parent="QuestMenu"]
+layout_mode = 1
+offset_left = 222.0
+offset_top = 57.0
+offset_right = 320.0
+offset_bottom = 88.0
+text = "Close Menu"
+
+[connection signal="button_down" from="Menu/OpenMenuButton" to="Menu" method="_on_open_menu_button_button_down"]
+[connection signal="button_down" from="Menu/AddQuestButton" to="Menu" method="_on_add_quest_button_button_down"]
+[connection signal="button_down" from="Menu/ProgressQuestButton" to="Menu" method="_on_progress_quest_button_button_down"]
+[connection signal="button_down" from="QuestMenu/CloseButton" to="QuestMenu" method="_on_close_button_button_down"]

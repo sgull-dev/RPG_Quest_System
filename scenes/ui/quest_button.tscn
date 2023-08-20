@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcprnc8vucm2n"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_quest_button.gd" id="1_fqor7"]
+
+[node name="QuestButton" type="Button"]
+text = "Quest Button"
+script = ExtResource("1_fqor7")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
